@@ -1,5 +1,5 @@
 from strenum import LowercaseStrEnum
-from typing import Literal
+from typing import Literal, Union
 
 
 class PostType(LowercaseStrEnum):
@@ -12,7 +12,7 @@ class PostType(LowercaseStrEnum):
     VIDEO = "video"
 
 
-PostTypeTyping = Literal["text", "photo", "quote", "link", "chat", "audio", "video"]
+PostTypeTyping = Union[Literal["text", "photo", "quote", "link", "chat", "audio", "video"], PostType]
 
 
 class PostFilter(LowercaseStrEnum):
@@ -21,7 +21,7 @@ class PostFilter(LowercaseStrEnum):
     RAW = "raw"
 
 
-PostFilterTyping = Literal["html", "text", "raw"]
+PostFilterTyping = Union[Literal["html", "text", "raw"], PostFilter]
 
 
 class PostState(LowercaseStrEnum):
@@ -31,7 +31,7 @@ class PostState(LowercaseStrEnum):
     PRIVATE = "private"
 
 
-PostStateTyping = Literal['published', 'draft', 'queue', 'private']
+PostStateTyping = Union[Literal['published', 'draft', 'queue', 'private'], PostState]
 
 
 class PostFormat(LowercaseStrEnum):
@@ -39,4 +39,4 @@ class PostFormat(LowercaseStrEnum):
     MARKDOWN = "markdown"
 
 
-PostFormatTyping = Literal['html', 'markdown']
+PostFormatTyping = Union[Literal['html', 'markdown'], PostFormat]
