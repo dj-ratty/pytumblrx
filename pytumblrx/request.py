@@ -48,10 +48,12 @@ class BasicTumblrRequest:
 
 class TumblrRequest(BasicTumblrRequest):
     def __init__(self, consumer_key, consumer_secret="", oauth_token="", oauth_secret="", *,
-                 host="https://api.tumblr.com"):  # TODO: Support host change
+                 host="https://api.tumblr.com", client_kwargs=None):  # TODO: Support host change
         super().__init__(consumer_key, host=host)
+        if client_kwargs is None:
+            client_kwargs = dict()
         self.client = OAuth1Client(consumer_key, consumer_secret, oauth_token, oauth_secret,
-                                   headers=self.headers, base_url=self.host)
+                                   headers=self.headers, base_url=self.host, **client_kwargs)
 
     def request(self, method: Literal['GET', 'POST', 'PUT', 'DELETE'], url: Union[httpx.URL, str], *,
                 params: Optional[dict] = None, files: Optional[dict] = None, response_raw=False,
@@ -100,12 +102,14 @@ class TumblrRequest(BasicTumblrRequest):
 
 class TumblrAIORequest(BasicTumblrRequest):
     def __init__(self, consumer_key, consumer_secret="", oauth_token="", oauth_secret="", *,
-                 host="https://api.tumblr.com"):
+                 host="https://api.tumblr.com", client_kwargs=None):
         super(TumblrAIORequest, self).__init__(consumer_key, host=host)
+        if client_kwargs is None:
+            client_kwargs = dict()
 
         self.client_kwargs = dict(client_id=consumer_key, client_secret=consumer_secret,
                                   token=oauth_token, token_secret=oauth_secret, headers=self.headers,
-                                  base_url=self.host)
+                                  base_url=self.host, **client_kwargs)
 
     async def request(self, method: Literal['GET', 'POST', 'PUT', 'DELETE'], url: Union[httpx.URL, str], *,
                       params: Optional[dict] = None, files: Optional[dict] = None, response_raw=False,

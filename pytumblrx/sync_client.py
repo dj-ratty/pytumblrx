@@ -9,8 +9,10 @@ __all__ = ['TumblrRestClient']
 
 
 class TumblrRestClient(TumblrRestClientMixin):
-    def __init__(self, consumer_key, consumer_secret="", oauth_token="", oauth_secret="", host="https://api.tumblr.com"):
-        self.request = TumblrRequest(consumer_key, consumer_secret, oauth_token, oauth_secret, host=host)
+    def __init__(self, consumer_key, consumer_secret="", oauth_token="", oauth_secret="", host="https://api.tumblr.com",
+                 *, client_kwargs=None):
+        self.request = TumblrRequest(consumer_key, consumer_secret, oauth_token, oauth_secret, host=host,
+                                     client_kwargs=client_kwargs)
 
     def info(self):
         return self.request.get(TumblrEndpoints.USER_INFO)
