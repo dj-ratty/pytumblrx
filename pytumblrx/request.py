@@ -68,7 +68,7 @@ class TumblrRequest(BasicTumblrRequest):
                       params=params if method not in ("POST", "PUT", "PATCH") else None,
                       follow_redirects=False)
         if needs_api_key:
-            params['api_key'] = self.consumer_key
+            params['params']['api_key'] = self.consumer_key
         resp = self.client.request(**params)
         if response_raw:
             return resp
@@ -124,7 +124,7 @@ class TumblrAIORequest(BasicTumblrRequest):
                       params=params if method not in ("POST", "PUT", "PATCH") else None,
                       follow_redirects=False)
         if needs_api_key:
-            params['api_key'] = self.consumer_key
+            params['params']['api_key'] = self.consumer_key
         async with AsyncOAuth1Client(**self.client_kwargs) as client:
             resp = await client.request(**params)
             if response_raw:
