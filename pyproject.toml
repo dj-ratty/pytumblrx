@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytumblrx"
-version = "0.0.3"
+version = "0.0.4"
 description = "A Python Tumblr API v2 Client based on httpx with async support"
 authors = ["dj-ratty <115014503+dj-ratty@users.noreply.github.com>"]
 license = "MIT"
